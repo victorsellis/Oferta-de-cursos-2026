@@ -1,0 +1,487 @@
+index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Académica 2026 - ABC Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .card-selected { 
+            border: 2px solid #2563eb; 
+            background-color: #eff6ff;
+        }
+        .check-icon {
+            display: none;
+        }
+        .card-selected .check-icon {
+            display: block;
+        }
+        .card-selected .select-text {
+            display: none;
+        }
+        /* Smooth scroll behavior */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="pb-24">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- Logo Placeholder / Icon -->
+                <div class="bg-blue-600 text-white p-2 rounded-lg">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900 leading-tight">ABC Training</h1>
+                    <p class="text-xs text-gray-500">Oferta Académica 2026</p>
+                </div>
+            </div>
+            <div class="hidden md:block text-sm text-gray-600">
+                <span id="counter-desktop" class="font-semibold text-blue-600">0</span> cursos seleccionados
+            </div>
+        </div>
+    </header>
+
+    <!-- Intro Hero -->
+    <div class="bg-blue-900 text-white py-12 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">Potenciando el Futuro con ABC Training</h2>
+            <p class="text-blue-100 text-lg mb-6">Seleccione los cursos que desea implementar en su fundación para la gestión 2026 y envíenos su solicitud directamente por WhatsApp.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Area Cognitiva Empresarial -->
+        <section class="mb-12">
+            <div class="flex items-center gap-2 mb-6 border-b pb-2 border-gray-300">
+                <i data-lucide="briefcase" class="text-blue-700"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Área Cognitiva Empresarial</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="container-empresarial">
+                <!-- Cards will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- Area Cognitiva Académica -->
+        <section class="mb-12">
+            <div class="flex items-center gap-2 mb-6 border-b pb-2 border-gray-300">
+                <i data-lucide="book-open" class="text-green-700"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Área Cognitiva Académica</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="container-academica">
+                <!-- Cards will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- Area Socioemocional (NUEVA) -->
+        <section class="mb-12">
+            <div class="flex items-center gap-2 mb-6 border-b pb-2 border-gray-300">
+                <i data-lucide="smile" class="text-orange-500"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Área Socioemocional</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="container-socioemocional">
+                <!-- Cards will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- Area Física (NUEVA) -->
+        <section class="mb-12">
+            <div class="flex items-center gap-2 mb-6 border-b pb-2 border-gray-300">
+                <i data-lucide="activity" class="text-purple-600"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Área Física</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="container-fisica">
+                <!-- Cards will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- Area Espiritual -->
+        <section class="mb-12">
+            <div class="flex items-center gap-2 mb-6 border-b pb-2 border-gray-300">
+                <i data-lucide="heart" class="text-red-600"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Área Espiritual</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="container-espiritual">
+                <!-- Cards will be injected here via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sticky Bottom Bar for Mobile/Desktop Action -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-lg p-4 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+            <div class="text-gray-700">
+                <p class="text-sm font-medium">Resumen de solicitud:</p>
+                <p class="text-lg font-bold text-blue-900"><span id="counter-mobile">0</span> Cursos</p>
+            </div>
+            <button onclick="sendWhatsApp()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 flex items-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Solicitar Cursos</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Data and Logic -->
+    <script>
+        // Data Structure based on user prompt
+        const courses = [
+            // Empresarial
+            {
+                id: 1,
+                category: 'empresarial',
+                title: "Computación Básica",
+                price: "2000 Bs/mes",
+                age: "Desde 9 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "10:00 - 16:00",
+                frequency: "1 vez/semana",
+                duration: "10 meses",
+                details: "Windows 11, Word 365, Excel 365, PowerPoint 365, Internet, Mecanografía. 4 grupos de 1h o 2 de 2h."
+            },
+            {
+                id: 2,
+                category: 'empresarial',
+                title: "Mecanografía",
+                price: "2000 Bs/mes",
+                age: "Desde 7 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "10:00 - 16:00",
+                frequency: "1 vez/semana",
+                duration: "3 meses",
+                details: "512 niveles con gamificación. Ideal para inicio en computación y refuerzo de lectoescritura."
+            },
+            {
+                id: 3,
+                category: 'empresarial',
+                title: "Análisis de Datos",
+                price: "2000 Bs/mes",
+                age: "Desde 15 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "6 meses",
+                details: "Excel básico, intermedio y avanzado. Power BI básico, intermedio y avanzado."
+            },
+            {
+                id: 4,
+                category: 'empresarial',
+                title: "Excel Pro",
+                price: "2000 Bs/mes",
+                age: "Desde 15 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "3 meses",
+                details: "Excel básico, intermedio y avanzado intensivo."
+            },
+            {
+                id: 5,
+                category: 'empresarial',
+                title: "Power BI",
+                price: "2000 Bs/mes",
+                age: "Desde 15 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "3 meses",
+                details: "Power BI básico, intermedio y avanzado."
+            },
+            {
+                id: 6,
+                category: 'empresarial',
+                title: "Marketing Digital",
+                price: "2000 Bs/mes",
+                age: "Mayores de 12 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "6 meses",
+                details: "48 plataformas de MKT Digital. Incluye Canva Pro 1 año para estudiante y CDI."
+            },
+            {
+                id: 7,
+                category: 'empresarial',
+                title: "Edición de Videos",
+                price: "2000 Bs/mes",
+                age: "Mayores de 12 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "6 meses",
+                details: "Canva, Premiere, Capcut, Filmora, Google Flow, Clipchamp. Licencias incluidas para prácticas."
+            },
+            {
+                id: 8,
+                category: 'empresarial',
+                title: "Plan de Negocios",
+                price: "2000 Bs/mes",
+                age: "Mayores de 12 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "6 meses",
+                details: "Plan de negocios, estudio de mercado, marketing, operativo, financiero y RRHH."
+            },
+            // Academica
+            {
+                id: 9,
+                category: 'academica',
+                title: "Apoyo Escolar Primaria",
+                price: "2000 Bs/mes",
+                age: "Niños en primaria",
+                capacity: "Estudiantes ilimitados",
+                schedule: "10:00 - 16:00",
+                frequency: "1 vez/semana",
+                duration: "10 meses (sugerido)",
+                details: "Refuerzo en Matemáticas y Lenguaje."
+            },
+            {
+                id: 10,
+                category: 'academica',
+                title: "Apoyo Escolar Secundaria",
+                price: "2000 Bs/mes",
+                age: "Niños en secundaria",
+                capacity: "Estudiantes ilimitados",
+                schedule: "10:00 - 16:00",
+                frequency: "1 vez/semana",
+                duration: "10 meses (sugerido)",
+                details: "Refuerzo en Matemáticas, Física y Química."
+            },
+            {
+                id: 11,
+                category: 'academica',
+                title: "Lectoescritura",
+                price: "2000 Bs/mes",
+                age: "Inicial/Primaria o nivelación",
+                capacity: "Estudiantes ilimitados",
+                schedule: "10:00 - 16:00",
+                frequency: "1 vez/semana",
+                duration: "10 meses (sugerido)",
+                details: "Para niños que no saben leer/escribir. Matemáticas y Lenguaje."
+            },
+            {
+                id: 12,
+                category: 'academica',
+                title: "Alfabetización",
+                price: "2000 Bs/mes",
+                age: "Adolescentes y Adultos",
+                capacity: "Estudiantes ilimitados",
+                schedule: "10:00 - 16:00",
+                frequency: "1 vez/semana",
+                duration: "10 meses (sugerido)",
+                details: "Lectoescritura para padres, madres o jóvenes."
+            },
+            // Socioemocional
+            {
+                id: 16,
+                category: 'socioemocional',
+                title: "Oratoria",
+                price: "2000 Bs/mes",
+                age: "Mayores de 12 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "3 meses",
+                details: "Introducción a la oratoria, técnica de oratoria, el discurso, manejo de escenario."
+            },
+            {
+                id: 17,
+                category: 'socioemocional',
+                title: "Oratoria para Niños",
+                price: "2000 Bs/mes",
+                age: "De 8 a 12 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "3 meses",
+                details: "Introducción a la oratoria, técnica de oratoria, el discurso, manejo de escenario adaptado."
+            },
+             // Fisica
+             {
+                id: 18,
+                category: 'fisica',
+                title: "Dinámicas para Niños",
+                price: "2000 Bs/mes",
+                age: "Mayores de 15 años",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "1 mes",
+                details: "Dinámicas grupales y recreativas."
+            },
+            {
+                id: 19,
+                category: 'fisica',
+                title: "Manualidades",
+                price: "2000 Bs/mes",
+                age: "Todos los estudiantes",
+                capacity: "Estudiantes ilimitados",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "1 mes",
+                details: "Técnicas de manualidades y creatividad."
+            },
+            // Espiritual
+            {
+                id: 13,
+                category: 'espiritual',
+                title: "Curso de Música",
+                price: "2000 Bs/mes",
+                age: "General",
+                capacity: "Hasta 12 estudiantes",
+                schedule: "2 hrs (Elección)",
+                frequency: "1 vez/semana",
+                duration: "10 meses",
+                details: "Guitarra, bajo, teclado. Nota: Si la iglesia no tiene instrumentos, precio aumenta 1000 Bs."
+            },
+            {
+                id: 14,
+                category: 'espiritual',
+                title: "Maestro Educación Cristiana",
+                price: "2000 Bs/mes",
+                age: "Mayores de 15 años",
+                capacity: "Hasta 12 estudiantes",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "12 meses",
+                details: "Evangelismo, pedagogía, psicología, títeres, liderazgo, oratoria y más."
+            },
+            {
+                id: 15,
+                category: 'espiritual',
+                title: "Maestro Evangelista Niños",
+                price: "2000 Bs/mes",
+                age: "Mayores de 15 años",
+                capacity: "Hasta 12 estudiantes",
+                schedule: "2 hrs (Coordinación)",
+                frequency: "1 vez/semana",
+                duration: "4 meses",
+                details: "Enfoque intensivo en evangelismo, discipulado, pedagogía y psicología."
+            }
+        ];
+
+        let selectedCourses = new Set();
+
+        function renderCourses() {
+            const containers = {
+                empresarial: document.getElementById('container-empresarial'),
+                academica: document.getElementById('container-academica'),
+                socioemocional: document.getElementById('container-socioemocional'),
+                fisica: document.getElementById('container-fisica'),
+                espiritual: document.getElementById('container-espiritual')
+            };
+
+            courses.forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer relative border border-gray-100 flex flex-col';
+                card.id = `card-${course.id}`;
+                card.onclick = () => toggleSelection(course.id);
+
+                card.innerHTML = `
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-gray-800 pr-6 leading-tight">${course.title}</h4>
+                            <div class="absolute top-4 right-4">
+                                <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center bg-white indicator">
+                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 check-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-blue-600 font-bold text-xl mb-4">${course.price}</p>
+                        
+                        <div class="space-y-2 text-sm text-gray-600 mb-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="users-round" class="w-4 h-4 text-purple-500"></i>
+                                <span class="font-medium text-purple-700">Cupos: ${course.capacity}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4 text-gray-400"></i>
+                                <span>${course.duration} • ${course.frequency}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="users" class="w-4 h-4 text-gray-400"></i>
+                                <span>${course.age}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-gray-400"></i>
+                                <span>${course.schedule}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-3 rounded-lg text-xs text-gray-700 border border-gray-100">
+                            <strong>Contenido:</strong> ${course.details}
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50 border-t border-gray-100 mt-auto text-center">
+                        <span class="text-blue-600 font-semibold select-text text-sm">Clic para seleccionar</span>
+                        <span class="text-green-600 font-bold check-icon text-sm hidden flex items-center justify-center gap-1">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Seleccionado
+                        </span>
+                    </div>
+                `;
+
+                if (containers[course.category]) {
+                    containers[course.category].appendChild(card);
+                }
+            });
+            
+            // Re-initialize icons since we added dynamic HTML
+            lucide.createIcons();
+        }
+
+        function toggleSelection(id) {
+            const card = document.getElementById(`card-${id}`);
+            if (selectedCourses.has(id)) {
+                selectedCourses.delete(id);
+                card.classList.remove('card-selected');
+            } else {
+                selectedCourses.add(id);
+                card.classList.add('card-selected');
+            }
+            updateCounters();
+        }
+
+        function updateCounters() {
+            const count = selectedCourses.size;
+            document.getElementById('counter-desktop').textContent = count;
+            document.getElementById('counter-mobile').textContent = count;
+        }
+
+        function sendWhatsApp() {
+            if (selectedCourses.size === 0) {
+                alert("Por favor seleccione al menos un curso antes de solicitar información.");
+                return;
+            }
+
+            const phoneNumber = "59168811019";
+            let message = "Hola, me gustaría solicitar los siguientes cursos para la gestión 2026:\n\n";
+            
+            let total = 0;
+            selectedCourses.forEach(id => {
+                const course = courses.find(c => c.id === id);
+                message += `✅ *${course.title}*\n   (${course.duration} - ${course.price})\n`;
+            });
+
+            message += "\nPor favor, quedo atento a su respuesta para coordinar los detalles.";
+
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCourses();
+        });
+    </script>
+</body>
+</html>
